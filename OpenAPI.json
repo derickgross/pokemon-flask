@@ -1,0 +1,247 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Pokémon API",
+      "description": "An API to retrieve information about Pokémon",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000/api",
+        "description": "Local server"
+      }
+    ],
+    "paths": {
+      "/pokemon/{id}": {
+        "get": {
+          "summary": "Get Pokémon info",
+          "description": "Fetch information about a specific Pokémon by its ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "The ID of a Pokémon",
+              "schema": {
+                "type": "string",
+                "example": "1"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with Pokémon information",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Squirtle"
+                      },
+                      "type_1": {
+                        "type": "string",
+                        "example": "Water"
+                      },
+                      "type_2": {
+                        "type": "string",
+                        "example": "Water",
+                        "nullable": true
+                      },
+                      "total": {
+                        "type": "integer",
+                        "example": 314
+                      },
+                      "hp": {
+                        "type": "integer",
+                        "example": 44
+                      },
+                      "attack": {
+                        "type": "integer",
+                        "example": 48
+                      },
+                      "defense": {
+                        "type": "integer",
+                        "example": 65
+                      },
+                      "special_attack": {
+                        "type": "integer",
+                        "example": 50
+                      },
+                      "special_defense": {
+                        "type": "integer",
+                        "example": 64
+                      },
+                      "speed": {
+                        "type": "integer",
+                        "example": 43
+                      },
+                      "generation": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "legendary": {
+                        "type": "boolean",
+                        "example": false
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid ID provided)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Invalid Pokémon ID"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Pokémon not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Pokémon not found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/pokemon": {
+        "post": {
+          "summary": "Create a new Pokémon",
+          "description": "Create a new Pokémon with the provided details",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Charmander"
+                    },
+                    "type_1": {
+                      "type": "string",
+                      "example": "Fire"
+                    },
+                    "type_2": {
+                      "type": "string",
+                      "example": "Flying"
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": 309
+                    },
+                    "hp": {
+                      "type": "integer",
+                      "example": 39
+                    },
+                    "attack": {
+                      "type": "integer",
+                      "example": 52
+                    },
+                    "defense": {
+                      "type": "integer",
+                      "example": 43
+                    },
+                    "special_attack": {
+                      "type": "integer",
+                      "example": 60
+                    },
+                    "special_defense": {
+                      "type": "integer",
+                      "example": 50
+                    },
+                    "speed": {
+                      "type": "integer",
+                      "example": 65
+                    },
+                    "generation": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "legendary": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type_1",
+                    "total",
+                    "hp",
+                    "attack",
+                    "defense",
+                    "special_attack",
+                    "special_defense",
+                    "speed",
+                    "generation",
+                    "legendary"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Pokémon created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Pokémon created successfully with id 152"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (missing required fields)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Missing required fields to create new Pokémon: name, type_1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
